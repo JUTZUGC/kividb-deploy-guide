@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "kividb-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}

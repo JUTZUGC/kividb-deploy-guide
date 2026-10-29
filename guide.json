@@ -1,0 +1,101 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "kividb",
+    "nameCn": "KiviDB",
+    "repoName": "kividb-deploy-guide",
+    "oneLiner": "0.8k stars，AGPL-3.0，兼容 Redis 协议的 Rust 内存数据库",
+    "officialRepo": "https://github.com/kividbio/kividb",
+    "officialDocs": "https://github.com/kividbio/kividb/blob/main/README.md",
+    "stars": "0.8k",
+    "license": "AGPL-3.0",
+    "highlights": [
+      "协议兼容：Redis 客户端、库与 redis-cli 直接可用",
+      "多线程：分片内存设计，压满多核",
+      "内置检索：FT.* 全文、标签、数值与向量检索",
+      "持久化：快照 + 可选 append-only file",
+      "可选能力：Lua 脚本与 TLS 作为编译特性",
+      "默认 6380：可以和 Redis 6379 并存"
+    ],
+    "mcpSupport": "KiviDB 是数据库，不含 MCP；本仓库的 MCP 只提供部署步骤、端口与常见问题。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-28",
+    "verification": [
+      [
+        "README 确认 docker run 命令、6380 端口与 protected mode",
+        "已核对 2026-10-28"
+      ],
+      [
+        "Release v1.1.2 的多平台二进制资产与校验文件已核对",
+        "已核对 2026-10-28"
+      ],
+      [
+        "未实测启动与 Redis 兼容性（未拉取镜像）",
+        "说明 2026-10-28"
+      ],
+      [
+        "非目标宿主调用被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-28"
+      ]
+    ],
+    "deploy": {
+      "type": "docker",
+      "steps": [
+        "docker run -d --name kividb -p 6380:6380 kividb/kividb",
+        "docker logs --tail 20 kividb",
+        "echo \"部署完成：客户端连 127.0.0.1:6380，PING 应返回 PONG\""
+      ],
+      "stepsPs": [
+        "docker run -d --name kividb -p 6380:6380 kividb/kividb",
+        "docker logs --tail 20 kividb",
+        "Write-Host '部署完成：客户端连 127.0.0.1:6380，PING 应返回 PONG'"
+      ],
+      "source": "https://github.com/kividbio/kividb#quick-start"
+    },
+    "pitfalls": [
+      "端口冲突：6380 被占用时换宿主机端口，或停掉占用进程",
+      "连不上：确认容器在运行，且客户端连的是 6380 不是 6379",
+      "容器重建丢数据：先把数据目录挂到宿主机卷",
+      "跨机访问被拒：默认 protected mode，先配认证与 TLS",
+      "需要 Lua / TLS：用带对应特性的构建，默认镜像不一定开启",
+      "不要直接替换生产 Redis：先跑兼容性测试与压测"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/kividb-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/kividb-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "KiviDB 部署",
+    "KiviDB 教程",
+    "Redis 替代 开源",
+    "Valkey 替代",
+    "Rust 内存数据库",
+    "Redis 协议 兼容",
+    "向量检索 数据库",
+    "KiviDB Docker",
+    "KiviDB 中文",
+    "kividb deploy guide"
+  ],
+  "topics": [
+    "database",
+    "redis",
+    "rust",
+    "vector-search",
+    "docker"
+  ]
+}
